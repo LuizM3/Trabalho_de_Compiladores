@@ -26,6 +26,52 @@ other .
 "false" { fprintf(yyout, "%s (RESERVADA)\n", yytext); }
 
 %{
+/* −−−−−−−−−−−−−−−−−−−−−−−−−−−−− Declaração de tipos −−−−−−−−−−−−−−−−−−−−−−−−−−−−− */
+%}
+
+"int" { fprintf(yyout, "%s (TIPO)\n", yytext); }
+"bool" { fprintf(yyout, "%s (TIPO)\n", yytext); }
+
+%{
+/* −−−−−−−−−−−−−−−−−−−−−−−−−−−−− Operadores Aritméticos −−−−−−−−−−−−−−−−−−−−−−−−−−−−− */
+%}
+
+"+" { fprintf(yyout, "%s (OPER_ARIT)\n", yytext); }
+"-" { fprintf(yyout, "%s (OPER_ARIT)\n", yytext); }
+"*" { fprintf(yyout, "%s (OPER_ARIT)\n", yytext); }
+"/" { fprintf(yyout, "%s (OPER_ARIT)\n", yytext); }
+"^" { fprintf(yyout, "%s (OPER_ARIT)\n", yytext); }
+"%" { fprintf(yyout, "%s (OPER_ARIT)\n", yytext); }
+
+%{
+/* −−−−−−−−−−−−−−−−−−−−−−−−−−−−− Operadores Relacionais −−−−−−−−−−−−−−−−−−−−−−−−−−−−− */
+%}
+"<" { fprintf(yyout, "%s (OPER_RELA)\n", yytext); }
+">" { fprintf(yyout, "%s (OPER_RELA)\n", yytext); }
+"<=" { fprintf(yyout, "%s (OPER_RELA)\n", yytext); }
+">=" { fprintf(yyout, "%s (OPER_RELA)\n", yytext); }
+"==" { fprintf(yyout, "%s (OPER_RELA)\n", yytext); }
+"!=" { fprintf(yyout, "%s (OPER_RELA)\n", yytext); }
+
+%{
+/* −−−−−−−−−−−−−−−−−−−−−−−−−−−−− Operadores Lógicos −−−−−−−−−−−−−−−−−−−−−−−−−−−−− */
+%}
+"&" { fprintf(yyout, "%s (OPER_LOGI)\n", yytext); }
+"|" { fprintf(yyout, "%s (OPER_LOGI)\n", yytext); }
+"!" { fprintf(yyout, "%s (OPER_LOGI)\n", yytext); }
+
+%{
+/* −−−−−−−−−−−−−−−−−−−−−−−−−−−−− Símbolos de Pontuação −−−−−−−−−−−−−−−−−−−−−−−−−−−−− */
+%}
+";" { fprintf(yyout, "%s (Pontuação)\n", yytext); }
+"," { fprintf(yyout, "%s (Pontuação)\n", yytext); }
+"(" { fprintf(yyout, "%s (Pontuação)\n", yytext); }
+")" { fprintf(yyout, "%s (Pontuação)\n", yytext); }
+"{" { fprintf(yyout, "%s (Pontuação)\n", yytext); }
+"}" { fprintf(yyout, "%s (Pontuação)\n", yytext); }
+
+
+%{
 /* −−−−−−−−−−−−−−−−−−−−−−−−−−−−− Rules −−−−−−−−−−−−−−−−−−−−−−−−−−−−− */
 %}
 
