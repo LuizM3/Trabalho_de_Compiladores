@@ -5,16 +5,30 @@
 %}
 
 digit [0-9]
-number {digit}+(\.{digit}+)?
+number [+-]?{digit}+(\.{digit}+)?
 letter [a-zA-Z]
 word {letter}+
 comment "//"[^\n]*[\n]|"/*"[^"*/"]*"*/"
 other .
 
 %%
+
+%{
+/* −−−−−−−−−−−−−−−−−−−−−−−−−−−−− Palavras reservadas −−−−−−−−−−−−−−−−−−−−−−−−−−−−− */
+%}
+
+"if" { fprintf(yyout, "%s (RESERVADA)\n", yytext); }
+"else" { fprintf(yyout, "%s (RESERVADA)\n", yytext); }
+"while" { fprintf(yyout, "%s (RESERVADA)\n", yytext); }
+"print" { fprintf(yyout, "%s (RESERVADA)\n", yytext); }
+"read" { fprintf(yyout, "%s (RESERVADA)\n", yytext); }
+"true" { fprintf(yyout, "%s (RESERVADA)\n", yytext); }
+"false" { fprintf(yyout, "%s (RESERVADA)\n", yytext); }
+
 %{
 /* −−−−−−−−−−−−−−−−−−−−−−−−−−−−− Rules −−−−−−−−−−−−−−−−−−−−−−−−−−−−− */
 %}
+
 {number} { fprintf(yyout,"%s (NUMBER)\n", yytext); }
 {word} { fprintf(yyout, "%s (WORD)\n", yytext); }
 {comment} { fprintf(yyout, "%s (COMMENT)\n", yytext); }
