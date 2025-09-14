@@ -1,14 +1,18 @@
-%option noyywrap
+%option noyywrap yylineno
 %{
 /* −−−−−−−−−−−−−−−−−−−−−−−−−− D e f i n i t i o n s −−−−−−−−−−−−−−−−−−−−−−−−−− */
 #include<stdio.h>
+
+int column_number = 1;
 %}
 
 digit [0-9]
 number [+-]?{digit}+(\.{digit}+)?
 letter [a-zA-Z]
+delim [ \t\n]
+ws {delim}+
 word {letter}+
-comment "//"[^\n]*[\n]|"/*"[^"*/"]*"*/"
+comment "//"[^\n]*|"/*"[^"*/"]*"*/"
 other .
 
 %%
@@ -17,68 +21,70 @@ other .
 /* −−−−−−−−−−−−−−−−−−−−−−−−−−−−− Palavras reservadas −−−−−−−−−−−−−−−−−−−−−−−−−−−−− */
 %}
 
-"if" { fprintf(yyout, "%s (RESERVADA)\n", yytext); }
-"else" { fprintf(yyout, "%s (RESERVADA)\n", yytext); }
-"while" { fprintf(yyout, "%s (RESERVADA)\n", yytext); }
-"print" { fprintf(yyout, "%s (RESERVADA)\n", yytext); }
-"read" { fprintf(yyout, "%s (RESERVADA)\n", yytext); }
-"true" { fprintf(yyout, "%s (RESERVADA)\n", yytext); }
-"false" { fprintf(yyout, "%s (RESERVADA)\n", yytext); }
+"if" { fprintf(yyout, "%d(%d): %s (RESERVADA)\n", yylineno,column_number,yytext); column_number+=yyleng; }
+"else" { fprintf(yyout, "%d(%d): %s (RESERVADA)\n", yylineno,column_number,yytext); column_number+=yyleng; }
+"while" { fprintf(yyout, "%d(%d): %s (RESERVADA)\n", yylineno,column_number,yytext); column_number+=yyleng; }
+"print" { fprintf(yyout, "%d(%d): %s (RESERVADA)\n", yylineno,column_number,yytext); column_number+=yyleng; }
+"read" { fprintf(yyout, "%d(%d): %s (RESERVADA)\n", yylineno,column_number,yytext); column_number+=yyleng; }
+"true" { fprintf(yyout, "%d(%d): %s (RESERVADA)\n", yylineno,column_number,yytext); column_number+=yyleng; }
+"false" { fprintf(yyout, "%d(%d): %s (RESERVADA)\n", yylineno,column_number,yytext); column_number+=yyleng; }
 
 %{
 /* −−−−−−−−−−−−−−−−−−−−−−−−−−−−− Declaração de tipos −−−−−−−−−−−−−−−−−−−−−−−−−−−−− */
 %}
 
-"int" { fprintf(yyout, "%s (TIPO)\n", yytext); }
-"bool" { fprintf(yyout, "%s (TIPO)\n", yytext); }
+"int" { fprintf(yyout, "%d(%d): %s (TIPO)\n", yylineno,column_number,yytext); column_number+=yyleng; }
+"bool" { fprintf(yyout, "%d(%d): %s (TIPO)\n", yylineno,column_number,yytext); column_number+=yyleng; }
 
 %{
 /* −−−−−−−−−−−−−−−−−−−−−−−−−−−−− Operadores Aritméticos −−−−−−−−−−−−−−−−−−−−−−−−−−−−− */
 %}
 
-"+" { fprintf(yyout, "%s (OPER_ARIT)\n", yytext); }
-"-" { fprintf(yyout, "%s (OPER_ARIT)\n", yytext); }
-"*" { fprintf(yyout, "%s (OPER_ARIT)\n", yytext); }
-"/" { fprintf(yyout, "%s (OPER_ARIT)\n", yytext); }
-"^" { fprintf(yyout, "%s (OPER_ARIT)\n", yytext); }
-"%" { fprintf(yyout, "%s (OPER_ARIT)\n", yytext); }
+"+" { fprintf(yyout, "%d(%d): %s (OPER_ARIT)\n", yylineno,column_number,yytext); column_number+=yyleng; }
+"-" { fprintf(yyout, "%d(%d): %s (OPER_ARIT)\n", yylineno,column_number,yytext); column_number+=yyleng; }
+"*" { fprintf(yyout, "%d(%d): %s (OPER_ARIT)\n", yylineno,column_number,yytext); column_number+=yyleng; }
+"/" { fprintf(yyout, "%d(%d): %s (OPER_ARIT)\n", yylineno,column_number,yytext); column_number+=yyleng; }
+"^" { fprintf(yyout, "%d(%d): %s (OPER_ARIT)\n", yylineno,column_number,yytext); column_number+=yyleng; }
+"%" { fprintf(yyout, "%d(%d): %s (OPER_ARIT)\n", yylineno,column_number,yytext); column_number+=yyleng; }
 
 %{
 /* −−−−−−−−−−−−−−−−−−−−−−−−−−−−− Operadores Relacionais −−−−−−−−−−−−−−−−−−−−−−−−−−−−− */
 %}
-"<" { fprintf(yyout, "%s (OPER_RELA)\n", yytext); }
-">" { fprintf(yyout, "%s (OPER_RELA)\n", yytext); }
-"<=" { fprintf(yyout, "%s (OPER_RELA)\n", yytext); }
-">=" { fprintf(yyout, "%s (OPER_RELA)\n", yytext); }
-"==" { fprintf(yyout, "%s (OPER_RELA)\n", yytext); }
-"!=" { fprintf(yyout, "%s (OPER_RELA)\n", yytext); }
+"<" { fprintf(yyout, "%d(%d): %s (OPER_RELA)\n", yylineno,column_number,yytext); column_number+=yyleng; }
+">" { fprintf(yyout, "%d(%d): %s (OPER_RELA)\n", yylineno,column_number,yytext); column_number+=yyleng; }
+"<=" { fprintf(yyout, "%d(%d): %s (OPER_RELA)\n", yylineno,column_number,yytext); column_number+=yyleng; }
+">=" { fprintf(yyout, "%d(%d): %s (OPER_RELA)\n", yylineno,column_number,yytext); column_number+=yyleng; }
+"==" { fprintf(yyout, "%d(%d): %s (OPER_RELA)\n", yylineno,column_number,yytext); column_number+=yyleng; }
+"!=" { fprintf(yyout, "%d(%d): %s (OPER_RELA)\n", yylineno,column_number,yytext); column_number+=yyleng; }
 
 %{
 /* −−−−−−−−−−−−−−−−−−−−−−−−−−−−− Operadores Lógicos −−−−−−−−−−−−−−−−−−−−−−−−−−−−− */
 %}
-"&" { fprintf(yyout, "%s (OPER_LOGI)\n", yytext); }
-"|" { fprintf(yyout, "%s (OPER_LOGI)\n", yytext); }
-"!" { fprintf(yyout, "%s (OPER_LOGI)\n", yytext); }
+"&" { fprintf(yyout, "%d(%d): %s (OPER_LOGI)\n", yylineno,column_number,yytext); column_number+=yyleng; }
+"|" { fprintf(yyout, "%d(%d): %s (OPER_LOGI)\n", yylineno,column_number,yytext); column_number+=yyleng; }
+"!" { fprintf(yyout, "%d(%d): %s (OPER_LOGI)\n", yylineno,column_number,yytext); column_number+=yyleng; }
 
 %{
 /* −−−−−−−−−−−−−−−−−−−−−−−−−−−−− Símbolos de Pontuação −−−−−−−−−−−−−−−−−−−−−−−−−−−−− */
 %}
-";" { fprintf(yyout, "%s (Pontuação)\n", yytext); }
-"," { fprintf(yyout, "%s (Pontuação)\n", yytext); }
-"(" { fprintf(yyout, "%s (Pontuação)\n", yytext); }
-")" { fprintf(yyout, "%s (Pontuação)\n", yytext); }
-"{" { fprintf(yyout, "%s (Pontuação)\n", yytext); }
-"}" { fprintf(yyout, "%s (Pontuação)\n", yytext); }
+";" { fprintf(yyout, "%d(%d): %s (Pontuação)\n", yylineno,column_number,yytext); column_number+=yyleng; }
+"," { fprintf(yyout, "%d(%d): %s (Pontuação)\n", yylineno,column_number,yytext); column_number+=yyleng; }
+"(" { fprintf(yyout, "%d(%d): %s (Pontuação)\n", yylineno,column_number,yytext); column_number+=yyleng; }
+")" { fprintf(yyout, "%d(%d): %s (Pontuação)\n", yylineno,column_number,yytext); column_number+=yyleng; }
+"{" { fprintf(yyout, "%d(%d): %s (Pontuação)\n", yylineno,column_number,yytext); column_number+=yyleng; }
+"}" { fprintf(yyout, "%d(%d): %s (Pontuação)\n", yylineno,column_number,yytext); column_number+=yyleng; }
 
 
 %{
 /* −−−−−−−−−−−−−−−−−−−−−−−−−−−−− Rules −−−−−−−−−−−−−−−−−−−−−−−−−−−−− */
 %}
 
-{number} { fprintf(yyout,"%s (NUMBER)\n", yytext); }
-{word} { fprintf(yyout, "%s (WORD)\n", yytext); }
-{comment} { fprintf(yyout, "%s (COMMENT)\n", yytext); }
-{other} { fprintf(yyout, "Lexical error. Input -> \"%s\"\n", yytext); }
+{number} { fprintf(yyout,"%d(%d): %s (NUMBER)\n", yylineno,column_number,yytext); column_number+=yyleng; }
+{word} { fprintf(yyout, "%d(%d): %s (WORD)\n", yylineno,column_number,yytext); column_number+=yyleng; }
+{comment} { }
+{ws} { }
+{other} { fprintf(yyout, "Lexical error. Input -> \"%d(%d): %s\"\n", yylineno,column_number,yytext); column_number+=yyleng; }
+\n { column_number = 1; }
 
 %%
 /* −−−−−−−−−−−−−−−−−−−−−−−− User s u b r o t i n e s −−−−−−−−−−−−−−−−−−−−−−−− */
