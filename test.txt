@@ -1,0 +1,10 @@
+int main() {
+    int x = 10;
+    /* Comentario
+     de varias linhas */
+    if (x > 5) {
+        // Comentario de uma linha
+        return x;
+    }
+    return 0;
+}
