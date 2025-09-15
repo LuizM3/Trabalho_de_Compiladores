@@ -7,7 +7,7 @@ int column_number = 1;
 %}
 
 digit. [0-9]
-number {digit}+(\.{digit}+)?
+number {digit}
 letter [a-zA-Z]
 word {letter}+
 comment "//"[.*]
