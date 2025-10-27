@@ -1,0 +1,17 @@
+int x;
+x= 10;
+
+x = -4 + 5 -3;
+
+if ( (5) > (2) | 9 != 9 & 9 == 9){}
+
+
+else {
+    read (h, p = 5);
+    print (int x, y, 4, l);
+    }
+while(x > 3){
+    if(fg == 0){}
+    int l;
+}
+int j;

@@ -1,5 +1,6 @@
+#line 1 "lexer.c"
 
-#line 2 "lex.yy.c"
+#line 3 "lexer.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -373,8 +374,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 38
-#define YY_END_OF_BUFFER 39
+#define YY_NUM_RULES 40
+#define YY_END_OF_BUFFER 41
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -382,16 +383,17 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[72] =
+static const flex_int16_t yy_accept[84] =
     {   0,
-        0,    0,   39,   37,   35,   36,   25,   15,   23,   28,
-       29,   12,   10,   27,   11,   13,   32,   26,   17,   16,
-       18,   33,   14,   33,   33,   33,   33,   33,   33,   33,
-       33,   30,   24,   31,   35,   22,   32,   34,   19,   21,
-       20,   33,   33,   33,   33,    1,   33,   33,   33,   33,
-       33,   34,   33,   33,   33,    8,   33,   33,   33,   33,
-        9,    2,   33,   33,    5,    6,   33,    7,    4,    3,
-        0
+        0,    0,   41,   39,   37,   38,   27,   17,   25,   30,
+       31,   14,   12,   29,   13,   15,   34,   28,   19,   18,
+       20,   35,   16,   35,   35,   35,   35,   35,   35,   35,
+       35,   35,   32,   26,   33,   37,   24,    0,   36,   34,
+       21,   23,   22,   35,   35,   35,   35,    1,   35,   35,
+       35,   35,   35,   35,    0,    0,   36,   35,   35,   35,
+       10,   35,   35,   35,   35,   35,   35,   36,   11,    2,
+       35,    9,   35,    5,   35,    6,   35,    7,    4,   35,
+        3,    8,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -399,17 +401,17 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    2,    4,    1,    1,    1,    5,    6,    1,    7,
-        8,    9,   10,   11,   12,    1,   13,   14,   14,   14,
-       14,   14,   14,   14,   14,   14,   14,    1,   15,   16,
-       17,   18,    1,    1,   19,   19,   19,   19,   19,   19,
-       19,   19,   19,   19,   19,   19,   19,   19,   19,   19,
-       19,   19,   19,   19,   19,   19,   19,   19,   19,   19,
-        1,    1,    1,   20,   19,    1,   21,   22,   19,   23,
+        1,    2,    4,    5,    1,    1,    6,    7,    1,    8,
+        9,   10,   11,   12,   13,    1,   14,   15,   15,   15,
+       15,   15,   15,   15,   15,   15,   15,    1,   16,   17,
+       18,   19,    1,    1,   20,   20,   20,   20,   20,   20,
+       20,   20,   20,   20,   20,   20,   20,   20,   20,   20,
+       20,   20,   20,   20,   20,   20,   20,   20,   20,   20,
+        1,    1,    1,   21,   20,    1,   22,   23,   20,   24,
 
-       24,   25,   19,   26,   27,   19,   19,   28,   19,   29,
-       30,   31,   19,   32,   33,   34,   35,   19,   36,   19,
-       19,   19,   37,   38,   39,    1,    1,    1,    1,    1,
+       25,   26,   20,   27,   28,   20,   20,   29,   30,   31,
+       32,   33,   20,   34,   35,   36,   37,   20,   38,   20,
+       20,   20,   39,   40,   41,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -426,79 +428,85 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static const YY_CHAR yy_meta[40] =
+static const YY_CHAR yy_meta[42] =
     {   0,
-        1,    1,    2,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    3,    1,    1,    1,    1,    3,    1,
-        3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
-        3,    3,    3,    3,    3,    3,    1,    1,    1
+        1,    1,    2,    1,    3,    1,    1,    1,    1,    1,
+        1,    1,    1,    3,    4,    1,    1,    1,    1,    4,
+        1,    4,    4,    4,    4,    4,    4,    4,    4,    4,
+        4,    4,    4,    4,    4,    4,    4,    4,    1,    1,
+        1
     } ;
 
-static const flex_int16_t yy_base[74] =
+static const flex_int16_t yy_base[87] =
     {   0,
-        0,    0,   81,   82,   78,   82,   62,   82,   82,   82,
-       82,   82,   64,   82,   63,   63,   61,   82,   57,   56,
-       55,    0,   82,   41,   42,   48,   15,   36,   43,   34,
-       39,   82,   82,   82,   62,   82,   49,    0,   82,   82,
-       82,    0,   32,   28,   32,    0,   25,   31,   36,   21,
-       28,    0,   26,   29,   19,    0,   22,   27,   25,   20,
-        0,    0,   22,    9,    0,    0,   18,    0,    0,    0,
-       82,   38,   44
+        0,    0,   96,   97,   93,   97,   76,   97,   97,   97,
+       97,   97,   97,   97,   97,   32,   78,   97,   74,   73,
+       72,    0,   97,   57,   59,   65,   17,   64,   51,   59,
+       49,   55,   97,   97,   97,   79,   97,   70,    0,   64,
+       97,   97,   97,    0,   46,   42,   47,    0,   39,   46,
+       45,   22,   35,   43,   60,   55,    0,   39,   42,   29,
+        0,   30,   26,   32,   18,   29,   24,   97,    0,    0,
+       27,    0,   15,    0,   16,    0,   24,    0,    0,   16,
+        0,    0,   97,   41,   58,   62
     } ;
 
-static const flex_int16_t yy_def[74] =
+static const flex_int16_t yy_def[87] =
     {   0,
-       71,    1,   71,   71,   71,   71,   71,   71,   71,   71,
-       71,   71,   71,   71,   71,   71,   71,   71,   71,   71,
-       71,   72,   71,   72,   72,   72,   72,   72,   72,   72,
-       72,   71,   71,   71,   71,   71,   71,   73,   71,   71,
-       71,   72,   72,   72,   72,   72,   72,   72,   72,   72,
-       72,   73,   72,   72,   72,   72,   72,   72,   72,   72,
-       72,   72,   72,   72,   72,   72,   72,   72,   72,   72,
-        0,   71,   71
+       83,    1,   83,   83,   83,   83,   83,   83,   83,   83,
+       83,   83,   83,   83,   83,   83,   83,   83,   83,   83,
+       83,   84,   83,   84,   84,   84,   84,   84,   84,   84,
+       84,   84,   83,   83,   83,   83,   83,   85,   86,   83,
+       83,   83,   83,   84,   84,   84,   84,   84,   84,   84,
+       84,   84,   84,   84,   85,   83,   86,   84,   84,   84,
+       84,   84,   84,   84,   84,   84,   84,   83,   84,   84,
+       84,   84,   84,   84,   84,   84,   84,   84,   84,   84,
+       84,   84,    0,   83,   83,   83
     } ;
 
-static const flex_int16_t yy_nxt[122] =
+static const flex_int16_t yy_nxt[139] =
     {   0,
-        4,    5,    6,    7,    8,    9,   10,   11,   12,   13,
-       14,   15,   16,   17,   18,   19,   20,   21,   22,   23,
-       22,   24,   22,   25,   26,   22,   27,   22,   22,   22,
-       28,   29,   22,   30,   22,   31,   32,   33,   34,   46,
-       42,   70,   69,   47,   52,   68,   52,   67,   66,   65,
-       64,   63,   62,   61,   60,   59,   58,   57,   56,   55,
-       54,   53,   37,   35,   51,   50,   49,   48,   45,   44,
-       43,   41,   40,   39,   37,   38,   37,   37,   36,   35,
-       71,    3,   71,   71,   71,   71,   71,   71,   71,   71,
-       71,   71,   71,   71,   71,   71,   71,   71,   71,   71,
+        4,    5,    6,    7,    4,    8,    9,   10,   11,   12,
+       13,   14,   15,   16,   17,   18,   19,   20,   21,   22,
+       23,   22,   24,   22,   25,   26,   22,   27,   22,   28,
+       22,   22,   29,   30,   22,   31,   22,   32,   33,   34,
+       35,   38,   48,   64,   44,   39,   82,   49,   81,   80,
+       79,   78,   77,   76,   75,   74,   73,   65,   55,   55,
+       72,   55,   57,   71,   57,   57,   70,   69,   68,   56,
+       67,   66,   63,   62,   61,   60,   59,   58,   40,   56,
+       36,   54,   53,   52,   51,   50,   47,   46,   45,   43,
+       42,   41,   40,   37,   36,   83,    3,   83,   83,   83,
 
-       71,   71,   71,   71,   71,   71,   71,   71,   71,   71,
-       71,   71,   71,   71,   71,   71,   71,   71,   71,   71,
-       71
+       83,   83,   83,   83,   83,   83,   83,   83,   83,   83,
+       83,   83,   83,   83,   83,   83,   83,   83,   83,   83,
+       83,   83,   83,   83,   83,   83,   83,   83,   83,   83,
+       83,   83,   83,   83,   83,   83,   83,   83
     } ;
 
-static const flex_int16_t yy_chk[122] =
+static const flex_int16_t yy_chk[139] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,   27,
-       72,   67,   64,   27,   73,   63,   73,   60,   59,   58,
-       57,   55,   54,   53,   51,   50,   49,   48,   47,   45,
-       44,   43,   37,   35,   31,   30,   29,   28,   26,   25,
-       24,   21,   20,   19,   17,   16,   15,   13,    7,    5,
-        3,   71,   71,   71,   71,   71,   71,   71,   71,   71,
-       71,   71,   71,   71,   71,   71,   71,   71,   71,   71,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,   16,   27,   52,   84,   16,   80,   27,   77,   75,
+       73,   71,   67,   66,   65,   64,   63,   52,   85,   85,
+       62,   85,   86,   60,   86,   86,   59,   58,   56,   55,
+       54,   53,   51,   50,   49,   47,   46,   45,   40,   38,
+       36,   32,   31,   30,   29,   28,   26,   25,   24,   21,
+       20,   19,   17,    7,    5,    3,   83,   83,   83,   83,
 
-       71,   71,   71,   71,   71,   71,   71,   71,   71,   71,
-       71,   71,   71,   71,   71,   71,   71,   71,   71,   71,
-       71
+       83,   83,   83,   83,   83,   83,   83,   83,   83,   83,
+       83,   83,   83,   83,   83,   83,   83,   83,   83,   83,
+       83,   83,   83,   83,   83,   83,   83,   83,   83,   83,
+       83,   83,   83,   83,   83,   83,   83,   83
     } ;
 
 /* Table of booleans, true if rule could match eol. */
-static const flex_int32_t yy_rule_can_match_eol[39] =
+static const flex_int32_t yy_rule_can_match_eol[41] =
     {   0,
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,     };
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 
+    0,     };
 
 static yy_state_type yy_last_accepting_state;
 static char *yy_last_accepting_cpos;
@@ -514,63 +522,21 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "teste.l"
-#line 3 "teste.l"
+#line 1 "main.l"
+#line 3 "main.l"
 /* −−−−−−−−−−−−−−−−−−−−−−−−−− D e f i n i t i o n s −−−−−−−−−−−−−−−−−−−−−−−−−− */
 #include<stdio.h>
+#include<string.h> // Adicionado para strcmp e strdup
+#include<stdlib.h>  // Adicionado para mallo
+#include "parser.h"
+
+extern void inserir(const char*, const char*, int, int);
 
 int column_number = 1;
 
-#define TAM_TABELA 211  // tamanho da hash, número primo ajuda na dispersão
-
-/* Estrutura do símbolo */
-typedef struct simbolo {
-    char *lexema;           // texto do token
-    char *categoria;        // IDENTIFIER, NUMBER, OPER_ARIT, etc
-    int linha;              // linha onde apareceu
-    int coluna;             // coluna
-    struct simbolo *prox;   // para colisões da hash
-} Simbolo;
-
-Simbolo* tabela[TAM_TABELA] = {NULL};
-
-/* Função hash */
-unsigned int hash(const char *s) {
-    unsigned int h = 0;
-    while (*s) {
-        h = (h << 4) + *s++;
-        unsigned int g = h & 0xF0000000L;
-        if (g) h ^= g >> 24;
-        h &= ~g;
-    }
-    return h % TAM_TABELA;
-}
-
-/* Busca símbolo */
-Simbolo* buscar(const char* lexema) {
-    unsigned int h = hash(lexema);
-    for (Simbolo* s = tabela[h]; s != NULL; s = s->prox) {
-        if (strcmp(s->lexema, lexema) == 0) return s;
-    }
-    return NULL;
-}
-
-/* Insere símbolo */
-void inserir(const char* lexema, const char* categoria, int linha, int coluna) {
-    if (buscar(lexema) != NULL) return; // evita duplicatas
-    unsigned int h = hash(lexema);
-    Simbolo* novo = (Simbolo*) malloc(sizeof(Simbolo));
-    novo->lexema = strdup(lexema);
-    novo->categoria = strdup(categoria);
-    novo->linha = linha;
-    novo->coluna = coluna;
-    novo->prox = tabela[h];
-    tabela[h] = novo;
-}
-
-#line 571 "lex.yy.c"
-/* Definições de regex */
-#line 573 "lex.yy.c"
+#line 537 "lexer.c"
+/* Definições de regra */
+#line 539 "lexer.c"
 
 #define INITIAL 0
 
@@ -787,15 +753,15 @@ YY_DECL
 		}
 
 	{
-#line 65 "teste.l"
+#line 23 "main.l"
 
 
 
-#line 69 "teste.l"
+#line 27 "main.l"
 /* −−−−−−−−−−−−−−−−−−−−−−−−−−−−− Palavras reservadas −−−−−−−−−−−−−−−−−−−−−−−−−−−−− */
 
 
-#line 798 "lex.yy.c"
+#line 764 "lexer.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -822,13 +788,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 72 )
+				if ( yy_current_state >= 84 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 82 );
+		while ( yy_base[yy_current_state] != 97 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -864,248 +830,226 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 72 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (RESERVADA)\n", yylineno,column_number,yytext); 
-              inserir(yytext, "RESERVADA", yylineno, column_number); column_number+=yyleng; }
+#line 30 "main.l"
+{ inserir(yytext, "RESERVADA", yylineno, column_number); column_number+=yyleng; return IF; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 74 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (RESERVADA)\n", yylineno,column_number,yytext); 
-              inserir(yytext, "RESERVADA", yylineno, column_number); column_number+=yyleng; }
+#line 31 "main.l"
+{ inserir(yytext, "RESERVADA", yylineno, column_number); column_number+=yyleng; return ELSE; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 76 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (RESERVADA)\n", yylineno,column_number,yytext); 
-              inserir(yytext, "RESERVADA", yylineno, column_number); column_number+=yyleng; }
+#line 32 "main.l"
+{ inserir(yytext, "RESERVADA", yylineno, column_number); column_number+=yyleng; return WHILE; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 78 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (RESERVADA)\n", yylineno,column_number,yytext); 
-              inserir(yytext, "RESERVADA", yylineno, column_number); column_number+=yyleng; }
+#line 33 "main.l"
+{ inserir(yytext, "RESERVADA", yylineno, column_number); column_number+=yyleng; return PRINT; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 80 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (RESERVADA)\n", yylineno,column_number,yytext); 
-              inserir(yytext, "RESERVADA", yylineno, column_number); column_number+=yyleng; }
+#line 34 "main.l"
+{ inserir(yytext, "RESERVADA", yylineno, column_number); column_number+=yyleng; return READ; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 82 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (RESERVADA)\n", yylineno,column_number,yytext); 
-              inserir(yytext, "RESERVADA", yylineno, column_number); column_number+=yyleng; }
+#line 35 "main.l"
+{ inserir(yytext, "RESERVADA", yylineno, column_number); column_number+=yyleng; return TRUE;  }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 84 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (RESERVADA)\n", yylineno,column_number,yytext); 
-              inserir(yytext, "RESERVADA", yylineno, column_number); column_number+=yyleng; }
+#line 36 "main.l"
+{ inserir(yytext, "RESERVADA", yylineno, column_number); column_number+=yyleng; return FALSE; }
+	YY_BREAK
+case 8:
+YY_RULE_SETUP
+#line 37 "main.l"
+{ inserir(yytext, "RESERVADA", yylineno, column_number); column_number+=yyleng; return RETURN; }
+	YY_BREAK
+case 9:
+YY_RULE_SETUP
+#line 38 "main.l"
+{ inserir(yytext, "RESERVADA", yylineno, column_number); column_number+=yyleng; return MAIN; }
 	YY_BREAK
 
 /* −−−−−−−−−−−−−−−−−−−−−−−−−−−−− Declaração de tipos −−−−−−−−−−−−−−−−−−−−−−−−−−−−− */
 
-case 8:
+case 10:
 YY_RULE_SETUP
-#line 91 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (TIPO)\n", yylineno,column_number,yytext); 
-              inserir(yytext, "TIPO", yylineno, column_number); column_number+=yyleng; }
+#line 45 "main.l"
+{ inserir(yytext, "TIPO", yylineno, column_number); column_number+=yyleng; return INT; }
 	YY_BREAK
-case 9:
+case 11:
 YY_RULE_SETUP
-#line 93 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (TIPO)\n", yylineno,column_number,yytext); 
-              inserir(yytext, "TIPO", yylineno, column_number); column_number+=yyleng; }
+#line 46 "main.l"
+{ inserir(yytext, "TIPO", yylineno, column_number); column_number+=yyleng; return BOOL;  }
 	YY_BREAK
 
 /* −−−−−−−−−−−−−−−−−−−−−−−−−−−−− Operadores Aritméticos −−−−−−−−−−−−−−−−−−−−−−−−−−−−− */
 
-case 10:
-YY_RULE_SETUP
-#line 100 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (OPER_ARIT)\n", yylineno,column_number,yytext);
-      inserir(yytext, "OPER_ARIT", yylineno, column_number); column_number+=yyleng; }
-	YY_BREAK
-case 11:
-YY_RULE_SETUP
-#line 102 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (OPER_ARIT)\n", yylineno,column_number,yytext);
-      inserir(yytext, "OPER_ARIT", yylineno, column_number); column_number+=yyleng; }
-	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 104 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (OPER_ARIT)\n", yylineno,column_number,yytext);
-      inserir(yytext, "OPER_ARIT", yylineno, column_number); column_number+=yyleng; }
+#line 52 "main.l"
+{ inserir(yytext, "OPER_ARIT", yylineno, column_number); column_number+=yyleng; return PLUS; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 106 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (OPER_ARIT)\n", yylineno,column_number,yytext);
-      inserir(yytext, "OPER_ARIT", yylineno, column_number); column_number+=yyleng; }
+#line 53 "main.l"
+{ inserir(yytext, "OPER_ARIT", yylineno, column_number); column_number+=yyleng; return MINUS; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 108 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (OPER_ARIT)\n", yylineno,column_number,yytext);
-      inserir(yytext, "OPER_ARIT", yylineno, column_number); column_number+=yyleng; }
+#line 54 "main.l"
+{ inserir(yytext, "OPER_ARIT", yylineno, column_number); column_number+=yyleng; return TIMES; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 110 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (OPER_ARIT)\n", yylineno,column_number,yytext);
-      inserir(yytext, "OPER_ARIT", yylineno, column_number); column_number+=yyleng; }
+#line 55 "main.l"
+{ inserir(yytext, "OPER_ARIT", yylineno, column_number); column_number+=yyleng; return DIVIDE; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 112 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (OPER_ARIT)\n", yylineno,column_number,yytext);
-      inserir(yytext, "OPER_ARIT", yylineno, column_number); column_number+=yyleng; }
+#line 56 "main.l"
+{ inserir(yytext, "OPER_ARIT", yylineno, column_number); column_number+=yyleng; return ELEVA; }
+	YY_BREAK
+case 17:
+YY_RULE_SETUP
+#line 57 "main.l"
+{ inserir(yytext, "OPER_ARIT", yylineno, column_number); column_number+=yyleng; return RESTO; }
+	YY_BREAK
+case 18:
+YY_RULE_SETUP
+#line 58 "main.l"
+{ inserir(yytext, "OPER_ARIT", yylineno, column_number); column_number+=yyleng; return EQUALS; }
 	YY_BREAK
 
 /* −−−−−−−−−−−−−−−−−−−−−−−−−−−−− Operadores Relacionais −−−−−−−−−−−−−−−−−−−−−−−−−−−−− */
 
-case 17:
-YY_RULE_SETUP
-#line 119 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (OPER_RELA)\n", yylineno,column_number,yytext);
-        inserir(yytext, "OPER_RELA", yylineno, column_number); column_number+=yyleng; }
-	YY_BREAK
-case 18:
-YY_RULE_SETUP
-#line 121 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (OPER_RELA)\n", yylineno,column_number,yytext);
-        inserir(yytext, "OPER_RELA", yylineno, column_number); column_number+=yyleng; }
-	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 123 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (OPER_RELA)\n", yylineno,column_number,yytext);
-        inserir(yytext, "OPER_RELA", yylineno, column_number); column_number+=yyleng; }
+#line 64 "main.l"
+{ inserir(yytext, "OPER_RELA", yylineno, column_number); column_number+=yyleng; return LT; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 125 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (OPER_RELA)\n", yylineno,column_number,yytext);
-        inserir(yytext, "OPER_RELA", yylineno, column_number); column_number+=yyleng; }
+#line 65 "main.l"
+{ inserir(yytext, "OPER_RELA", yylineno, column_number); column_number+=yyleng; return MT; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 127 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (OPER_RELA)\n", yylineno,column_number,yytext);
-        inserir(yytext, "OPER_RELA", yylineno, column_number); column_number+=yyleng; }
+#line 66 "main.l"
+{ inserir(yytext, "OPER_RELA", yylineno, column_number); column_number+=yyleng; return LE; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 129 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (OPER_RELA)\n", yylineno,column_number,yytext);
-        inserir(yytext, "OPER_RELA", yylineno, column_number); column_number+=yyleng; }
+#line 67 "main.l"
+{ inserir(yytext, "OPER_RELA", yylineno, column_number); column_number+=yyleng; return ME; }
+	YY_BREAK
+case 23:
+YY_RULE_SETUP
+#line 68 "main.l"
+{ inserir(yytext, "OPER_RELA", yylineno, column_number); column_number+=yyleng; return ET; }
+	YY_BREAK
+case 24:
+YY_RULE_SETUP
+#line 69 "main.l"
+{ inserir(yytext, "OPER_RELA", yylineno, column_number); column_number+=yyleng; return DT; }
 	YY_BREAK
 
 /* −−−−−−−−−−−−−−−−−−−−−−−−−−−−− Operadores Lógicos −−−−−−−−−−−−−−−−−−−−−−−−−−−−− */
 
-case 23:
-YY_RULE_SETUP
-#line 136 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (OPER_LOGI)\n", yylineno,column_number,yytext);
-      inserir(yytext, "OPER_LOGI", yylineno, column_number); column_number+=yyleng; }
-	YY_BREAK
-case 24:
-YY_RULE_SETUP
-#line 138 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (OPER_LOGI)\n", yylineno,column_number,yytext);
-      inserir(yytext, "OPER_LOGI", yylineno, column_number); column_number+=yyleng; }
-	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 140 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (OPER_LOGI)\n", yylineno,column_number,yytext);
-      inserir(yytext, "OPER_LOGI", yylineno, column_number); column_number+=yyleng; }
+#line 75 "main.l"
+{ inserir(yytext, "OPER_LOGI", yylineno, column_number); column_number+=yyleng; return AND; }
+	YY_BREAK
+case 26:
+YY_RULE_SETUP
+#line 76 "main.l"
+{ inserir(yytext, "OPER_LOGI", yylineno, column_number); column_number+=yyleng; return OR; }
+	YY_BREAK
+case 27:
+YY_RULE_SETUP
+#line 77 "main.l"
+{ inserir(yytext, "OPER_LOGI", yylineno, column_number); column_number+=yyleng; return NOT; }
 	YY_BREAK
 
 /* −−−−−−−−−−−−−−−−−−−−−−−−−−−−− Símbolos de Pontuação −−−−−−−−−−−−−−−−−−−−−−−−−−−−− */
 
-case 26:
-YY_RULE_SETUP
-#line 147 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (PONTUACAO)\n", yylineno,column_number,yytext);
-      inserir(yytext, "PONTUACAO", yylineno, column_number); column_number+=yyleng; }
-	YY_BREAK
-case 27:
-YY_RULE_SETUP
-#line 149 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (PONTUACAO)\n", yylineno,column_number,yytext);
-      inserir(yytext, "PONTUACAO", yylineno, column_number); column_number+=yyleng; }
-	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 151 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (PONTUACAO)\n", yylineno,column_number,yytext);
-      inserir(yytext, "PONTUACAO", yylineno, column_number); column_number+=yyleng; }
+#line 83 "main.l"
+{ inserir(yytext, "PONTUACAO", yylineno, column_number); column_number+=yyleng; return SEMI; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 153 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (PONTUACAO)\n", yylineno,column_number,yytext);
-      inserir(yytext, "PONTUACAO", yylineno, column_number); column_number+=yyleng; }
+#line 84 "main.l"
+{ inserir(yytext, "PONTUACAO", yylineno, column_number); column_number+=yyleng; return COMMA; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 155 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (PONTUACAO)\n", yylineno,column_number,yytext);
-      inserir(yytext, "PONTUACAO", yylineno, column_number); column_number+=yyleng; }
+#line 85 "main.l"
+{ inserir(yytext, "PONTUACAO", yylineno, column_number); column_number+=yyleng; return OP; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 157 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (PONTUACAO)\n", yylineno,column_number,yytext);
-      inserir(yytext, "PONTUACAO", yylineno, column_number); column_number+=yyleng; }
+#line 86 "main.l"
+{ inserir(yytext, "PONTUACAO", yylineno, column_number); column_number+=yyleng; return CP; }
+	YY_BREAK
+case 32:
+YY_RULE_SETUP
+#line 87 "main.l"
+{ inserir(yytext, "PONTUACAO", yylineno, column_number); column_number+=yyleng; return OC; }
+	YY_BREAK
+case 33:
+YY_RULE_SETUP
+#line 88 "main.l"
+{ inserir(yytext, "PONTUACAO", yylineno, column_number); column_number+=yyleng; return CC; }
 	YY_BREAK
 
 /* −−−−−−−−−−−−−−−−−−−−−−−−−−−−− Rules −−−−−−−−−−−−−−−−−−−−−−−−−−−−− */
 
-case 32:
-YY_RULE_SETUP
-#line 164 "teste.l"
-{ fprintf(yyout,"%d(%d): %s (NUMBER)\n", yylineno,column_number,yytext);
-           inserir(yytext, "NUMBER", yylineno, column_number); column_number+=yyleng; }
-	YY_BREAK
-case 33:
-YY_RULE_SETUP
-#line 167 "teste.l"
-{ fprintf(yyout, "%d(%d): %s (IDENTIFIER)\n", yylineno, column_number, yytext);
-               inserir(yytext, "IDENTIFIER", yylineno, column_number); column_number+=yyleng; }
-	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 170 "teste.l"
-{ /* ignora */ }
+#line 94 "main.l"
+{ inserir(yytext, "NUMBER", yylineno, column_number); column_number+=yyleng; return NUMBER;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 171 "teste.l"
-{ column_number += yyleng; }
+#line 96 "main.l"
+{ inserir(yytext, "IDENTIFIER", yylineno, column_number); column_number+=yyleng; return IDENTIFIER; }
 	YY_BREAK
 case 36:
 /* rule 36 can match eol */
 YY_RULE_SETUP
-#line 172 "teste.l"
-{ column_number = 1; }
+#line 98 "main.l"
+{ }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 173 "teste.l"
+#line 99 "main.l"
+{ column_number += yyleng; }
+	YY_BREAK
+case 38:
+/* rule 38 can match eol */
+YY_RULE_SETUP
+#line 100 "main.l"
+{ column_number = 1; } //reseta a contagem de colunas
+	YY_BREAK
+case 39:
+YY_RULE_SETUP
+#line 101 "main.l"
 { fprintf(yyout, "Lexical error. Input -> \"%d(%d): %s\"\n", yylineno,column_number,yytext);
       column_number+=yyleng; }
 	YY_BREAK
-case 38:
+case 40:
 YY_RULE_SETUP
-#line 176 "teste.l"
+#line 104 "main.l"
 ECHO;
 	YY_BREAK
-#line 1108 "lex.yy.c"
+#line 1052 "lexer.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1402,7 +1346,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 72 )
+			if ( yy_current_state >= 84 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1430,11 +1374,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 72 )
+		if ( yy_current_state >= 84 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 71);
+	yy_is_jam = (yy_current_state == 83);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -2122,32 +2066,9 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 176 "teste.l"
+#line 104 "main.l"
 
 
 /* −−−−−−−−−−−−−−−−−−−−−−−− User s u b r o t i n e s −−−−−−−−−−−−−−−−−−−−−−−− */
 
-int main(int argc, char *argv[]){
-    if (argc < 2) {
-        fprintf(stderr, "Erro: Nenhum arquivo fornecido.\n");
-        return 1;
-    }
-    yyin = fopen(argv[1], "r");
-    if (!yyin) { perror("Erro ao abrir arquivo"); return 1; }
-    yyout = stdout;
-
-    yylex();
-
-    printf("\n--- TABELA DE SÍMBOLOS ---\n");
-    printf("\nToken         Lexema\n");
-    printf("----------------------\n");
-    for (int i = 0; i < TAM_TABELA; i++) {
-        for (Simbolo* s = tabela[i]; s != NULL; s = s->prox) {
-            printf("%-13s %s\n", s->categoria, s->lexema);
-        }
-    }
-
-    fclose(yyin);
-    return 0;
-}
 
