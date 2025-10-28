@@ -1,17 +1,24 @@
-int x;
-x= 10;
+   // Declaração e atribuição de variaveis
+    int x;
+    x = 10 // Faltando ";"
+    x = -4 + 5 - 3;
 
-x = -4 + 5 -3;
+    // Estrutura condicional composta
+    if ((x - -u) > 2 | y != z & z >= 12){
+        int k;
+    // Faltando "}"
 
-if ( (5) > (2) | 9 != 9 & 9 == 9){}
-
-
-else {
-    read (h, p = 5);
-    print (int x, y, 4, l);
+    else {
+        read (h p); // Faltando ","
+        int a;
+        print (x, y, 4, l);
     }
-while(x > 3){
-    if(fg == 0){}
-    int l;
-}
-int j;
+
+    // Laço de repetição
+    while(x > 3){
+        if(g == 0){
+           int l;        
+        }
+    }
+    int j;
+ 

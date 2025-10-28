@@ -1,0 +1,1792 @@
+Grammar
+
+    0 $accept: linhaP $end
+
+    1 linhaP: linha
+
+    2 linha: declaracao
+    3      | condicao
+    4      | laco
+    5      | entradaOuSaida
+    6      | lista SEMI linha
+    7      | ε
+
+    8 declaracao: tipo lista SEMI linha
+
+    9 condicao: IF OP verificacao CP restoDaCondicao linha
+   10         | IF OP verificacao error restoDaCondicao linha
+
+   11 laco: WHILE OP verificacao CP restoDoLaco linha
+   12     | WHILE OP verificacao error restoDoLaco linha
+
+   13 entradaOuSaida: PRINT OP listaPrint CP SEMI linha
+   14               | PRINT OP listaPrint CP error linha
+   15               | READ OP listaRead CP SEMI linha
+   16               | READ OP listaRead CP error linha
+
+   17 restoDaCondicao: OC linha CC possivelElse
+   18                | OC linha error possivelElse
+
+   19 possivelElse: ELSE OC linha CC
+   20             | ε
+
+   21 restoDoLaco: OC linha CC
+   22            | OC linha error
+
+   23 lista: variavel atribuir listaLinha
+
+   24 listaLinha: COMMA variavel atribuir listaLinha
+   25           | error variavel atribuir listaLinha
+   26           | ε
+
+   27 listaPrint: expr listaPrintLinha
+
+   28 listaPrintLinha: COMMA expr listaPrintLinha
+   29                | error expr listaPrintLinha
+   30                | ε
+
+   31 listaRead: IDENTIFIER listaReadLinha
+
+   32 listaReadLinha: COMMA IDENTIFIER listaReadLinha
+   33               | error IDENTIFIER listaReadLinha
+   34               | ε
+
+   35 tipo: INT
+   36     | BOOL
+
+   37 atribuir: EQUALS valor
+   38         | ε
+
+   39 verificacao: expr ET expr opLogico
+   40            | expr LT expr opLogico
+   41            | expr MT expr opLogico
+   42            | expr ME expr opLogico
+   43            | expr LE expr opLogico
+   44            | expr DT expr opLogico
+
+   45 opLogico: AND verificacao
+   46         | OR verificacao
+   47         | NOT verificacao
+   48         | ε
+
+   49 expr: expr PLUS t
+   50     | expr MINUS t
+   51     | t
+
+   52 t: t TIMES f
+   53  | t DIVIDE f
+   54  | f
+
+   55 f: OP expr CP
+   56  | MINUS NUMBER
+   57  | MINUS IDENTIFIER
+   58  | NUMBER
+   59  | IDENTIFIER
+
+   60 valor: expr
+   61      | TRUE
+   62      | FALSE
+
+   63 variavel: IDENTIFIER
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    error (256) 10 12 14 16 18 22 25 29 33
+    NUMBER (258) 56 58
+    IDENTIFIER (259) 31 32 33 57 59 63
+    SEMI (260) 6 8 13 15
+    INT (261) 35
+    BOOL (262) 36
+    COMMA (263) 24 28 32
+    EQUALS (264) 37
+    FALSE (265) 62
+    TRUE (266) 61
+    IF (267) 9 10
+    ELSE (268) 19
+    WHILE (269) 11 12
+    PRINT (270) 13 14
+    READ (271) 15 16
+    PLUS (272) 49
+    MINUS (273) 50 56 57
+    TIMES (274) 52
+    DIVIDE (275) 53
+    LT (276) 40
+    MT (277) 41
+    LE (278) 43
+    ME (279) 42
+    ET (280) 39
+    DT (281) 44
+    AND (282) 45
+    OR (283) 46
+    NOT (284) 47
+    OP (285) 9 10 11 12 13 14 15 16 55
+    CP (286) 9 11 13 14 15 16 55
+    OC (287) 17 18 19 21 22
+    CC (288) 17 19 21
+
+
+Nonterminals, with rules where they appear
+
+    $accept (34)
+        on left: 0
+    linhaP (35)
+        on left: 1
+        on right: 0
+    linha (36)
+        on left: 2 3 4 5 6 7
+        on right: 1 6 8 9 10 11 12 13 14 15 16 17 18 19 21 22
+    declaracao (37)
+        on left: 8
+        on right: 2
+    condicao (38)
+        on left: 9 10
+        on right: 3
+    laco (39)
+        on left: 11 12
+        on right: 4
+    entradaOuSaida (40)
+        on left: 13 14 15 16
+        on right: 5
+    restoDaCondicao (41)
+        on left: 17 18
+        on right: 9 10
+    possivelElse (42)
+        on left: 19 20
+        on right: 17 18
+    restoDoLaco (43)
+        on left: 21 22
+        on right: 11 12
+    lista (44)
+        on left: 23
+        on right: 6 8
+    listaLinha (45)
+        on left: 24 25 26
+        on right: 23 24 25
+    listaPrint (46)
+        on left: 27
+        on right: 13 14
+    listaPrintLinha (47)
+        on left: 28 29 30
+        on right: 27 28 29
+    listaRead (48)
+        on left: 31
+        on right: 15 16
+    listaReadLinha (49)
+        on left: 32 33 34
+        on right: 31 32 33
+    tipo (50)
+        on left: 35 36
+        on right: 8
+    atribuir (51)
+        on left: 37 38
+        on right: 23 24 25
+    verificacao (52)
+        on left: 39 40 41 42 43 44
+        on right: 9 10 11 12 45 46 47
+    opLogico (53)
+        on left: 45 46 47 48
+        on right: 39 40 41 42 43 44
+    expr (54)
+        on left: 49 50 51
+        on right: 27 28 29 39 40 41 42 43 44 49 50 55 60
+    t (55)
+        on left: 52 53 54
+        on right: 49 50 51 52 53
+    f (56)
+        on left: 55 56 57 58 59
+        on right: 52 53 54
+    valor (57)
+        on left: 60 61 62
+        on right: 37
+    variavel (58)
+        on left: 63
+        on right: 23 24 25
+
+
+State 0
+
+    0 $accept: • linhaP $end
+
+    IDENTIFIER  shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    IF          shift, and go to state 4
+    WHILE       shift, and go to state 5
+    PRINT       shift, and go to state 6
+    READ        shift, and go to state 7
+
+    $default  reduce using rule 7 (linha)
+
+    linhaP          go to state 8
+    linha           go to state 9
+    declaracao      go to state 10
+    condicao        go to state 11
+    laco            go to state 12
+    entradaOuSaida  go to state 13
+    lista           go to state 14
+    tipo            go to state 15
+    variavel        go to state 16
+
+
+State 1
+
+   63 variavel: IDENTIFIER •
+
+    $default  reduce using rule 63 (variavel)
+
+
+State 2
+
+   35 tipo: INT •
+
+    $default  reduce using rule 35 (tipo)
+
+
+State 3
+
+   36 tipo: BOOL •
+
+    $default  reduce using rule 36 (tipo)
+
+
+State 4
+
+    9 condicao: IF • OP verificacao CP restoDaCondicao linha
+   10         | IF • OP verificacao error restoDaCondicao linha
+
+    OP  shift, and go to state 17
+
+
+State 5
+
+   11 laco: WHILE • OP verificacao CP restoDoLaco linha
+   12     | WHILE • OP verificacao error restoDoLaco linha
+
+    OP  shift, and go to state 18
+
+
+State 6
+
+   13 entradaOuSaida: PRINT • OP listaPrint CP SEMI linha
+   14               | PRINT • OP listaPrint CP error linha
+
+    OP  shift, and go to state 19
+
+
+State 7
+
+   15 entradaOuSaida: READ • OP listaRead CP SEMI linha
+   16               | READ • OP listaRead CP error linha
+
+    OP  shift, and go to state 20
+
+
+State 8
+
+    0 $accept: linhaP • $end
+
+    $end  shift, and go to state 21
+
+
+State 9
+
+    1 linhaP: linha •
+
+    $default  reduce using rule 1 (linhaP)
+
+
+State 10
+
+    2 linha: declaracao •
+
+    $default  reduce using rule 2 (linha)
+
+
+State 11
+
+    3 linha: condicao •
+
+    $default  reduce using rule 3 (linha)
+
+
+State 12
+
+    4 linha: laco •
+
+    $default  reduce using rule 4 (linha)
+
+
+State 13
+
+    5 linha: entradaOuSaida •
+
+    $default  reduce using rule 5 (linha)
+
+
+State 14
+
+    6 linha: lista • SEMI linha
+
+    SEMI  shift, and go to state 22
+
+
+State 15
+
+    8 declaracao: tipo • lista SEMI linha
+
+    IDENTIFIER  shift, and go to state 1
+
+    lista     go to state 23
+    variavel  go to state 16
+
+
+State 16
+
+   23 lista: variavel • atribuir listaLinha
+
+    EQUALS  shift, and go to state 24
+
+    $default  reduce using rule 38 (atribuir)
+
+    atribuir  go to state 25
+
+
+State 17
+
+    9 condicao: IF OP • verificacao CP restoDaCondicao linha
+   10         | IF OP • verificacao error restoDaCondicao linha
+
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    MINUS       shift, and go to state 28
+    OP          shift, and go to state 29
+
+    verificacao  go to state 30
+    expr         go to state 31
+    t            go to state 32
+    f            go to state 33
+
+
+State 18
+
+   11 laco: WHILE OP • verificacao CP restoDoLaco linha
+   12     | WHILE OP • verificacao error restoDoLaco linha
+
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    MINUS       shift, and go to state 28
+    OP          shift, and go to state 29
+
+    verificacao  go to state 34
+    expr         go to state 31
+    t            go to state 32
+    f            go to state 33
+
+
+State 19
+
+   13 entradaOuSaida: PRINT OP • listaPrint CP SEMI linha
+   14               | PRINT OP • listaPrint CP error linha
+
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    MINUS       shift, and go to state 28
+    OP          shift, and go to state 29
+
+    listaPrint  go to state 35
+    expr        go to state 36
+    t           go to state 32
+    f           go to state 33
+
+
+State 20
+
+   15 entradaOuSaida: READ OP • listaRead CP SEMI linha
+   16               | READ OP • listaRead CP error linha
+
+    IDENTIFIER  shift, and go to state 37
+
+    listaRead  go to state 38
+
+
+State 21
+
+    0 $accept: linhaP $end •
+
+    $default  accept
+
+
+State 22
+
+    6 linha: lista SEMI • linha
+
+    IDENTIFIER  shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    IF          shift, and go to state 4
+    WHILE       shift, and go to state 5
+    PRINT       shift, and go to state 6
+    READ        shift, and go to state 7
+
+    $default  reduce using rule 7 (linha)
+
+    linha           go to state 39
+    declaracao      go to state 10
+    condicao        go to state 11
+    laco            go to state 12
+    entradaOuSaida  go to state 13
+    lista           go to state 14
+    tipo            go to state 15
+    variavel        go to state 16
+
+
+State 23
+
+    8 declaracao: tipo lista • SEMI linha
+
+    SEMI  shift, and go to state 40
+
+
+State 24
+
+   37 atribuir: EQUALS • valor
+
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    FALSE       shift, and go to state 41
+    TRUE        shift, and go to state 42
+    MINUS       shift, and go to state 28
+    OP          shift, and go to state 29
+
+    expr   go to state 43
+    t      go to state 32
+    f      go to state 33
+    valor  go to state 44
+
+
+State 25
+
+   23 lista: variavel atribuir • listaLinha
+
+    error  shift, and go to state 45
+    COMMA  shift, and go to state 46
+
+    SEMI  reduce using rule 26 (listaLinha)
+
+    listaLinha  go to state 47
+
+
+State 26
+
+   58 f: NUMBER •
+
+    $default  reduce using rule 58 (f)
+
+
+State 27
+
+   59 f: IDENTIFIER •
+
+    $default  reduce using rule 59 (f)
+
+
+State 28
+
+   56 f: MINUS • NUMBER
+   57  | MINUS • IDENTIFIER
+
+    NUMBER      shift, and go to state 48
+    IDENTIFIER  shift, and go to state 49
+
+
+State 29
+
+   55 f: OP • expr CP
+
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    MINUS       shift, and go to state 28
+    OP          shift, and go to state 29
+
+    expr  go to state 50
+    t     go to state 32
+    f     go to state 33
+
+
+State 30
+
+    9 condicao: IF OP verificacao • CP restoDaCondicao linha
+   10         | IF OP verificacao • error restoDaCondicao linha
+
+    error  shift, and go to state 51
+    CP     shift, and go to state 52
+
+
+State 31
+
+   39 verificacao: expr • ET expr opLogico
+   40            | expr • LT expr opLogico
+   41            | expr • MT expr opLogico
+   42            | expr • ME expr opLogico
+   43            | expr • LE expr opLogico
+   44            | expr • DT expr opLogico
+   49 expr: expr • PLUS t
+   50     | expr • MINUS t
+
+    PLUS   shift, and go to state 53
+    MINUS  shift, and go to state 54
+    LT     shift, and go to state 55
+    MT     shift, and go to state 56
+    LE     shift, and go to state 57
+    ME     shift, and go to state 58
+    ET     shift, and go to state 59
+    DT     shift, and go to state 60
+
+
+State 32
+
+   51 expr: t •
+   52 t: t • TIMES f
+   53  | t • DIVIDE f
+
+    TIMES   shift, and go to state 61
+    DIVIDE  shift, and go to state 62
+
+    $default  reduce using rule 51 (expr)
+
+
+State 33
+
+   54 t: f •
+
+    $default  reduce using rule 54 (t)
+
+
+State 34
+
+   11 laco: WHILE OP verificacao • CP restoDoLaco linha
+   12     | WHILE OP verificacao • error restoDoLaco linha
+
+    error  shift, and go to state 63
+    CP     shift, and go to state 64
+
+
+State 35
+
+   13 entradaOuSaida: PRINT OP listaPrint • CP SEMI linha
+   14               | PRINT OP listaPrint • CP error linha
+
+    CP  shift, and go to state 65
+
+
+State 36
+
+   27 listaPrint: expr • listaPrintLinha
+   49 expr: expr • PLUS t
+   50     | expr • MINUS t
+
+    error  shift, and go to state 66
+    COMMA  shift, and go to state 67
+    PLUS   shift, and go to state 53
+    MINUS  shift, and go to state 54
+
+    CP  reduce using rule 30 (listaPrintLinha)
+
+    listaPrintLinha  go to state 68
+
+
+State 37
+
+   31 listaRead: IDENTIFIER • listaReadLinha
+
+    error  shift, and go to state 69
+    COMMA  shift, and go to state 70
+
+    CP  reduce using rule 34 (listaReadLinha)
+
+    listaReadLinha  go to state 71
+
+
+State 38
+
+   15 entradaOuSaida: READ OP listaRead • CP SEMI linha
+   16               | READ OP listaRead • CP error linha
+
+    CP  shift, and go to state 72
+
+
+State 39
+
+    6 linha: lista SEMI linha •
+
+    $default  reduce using rule 6 (linha)
+
+
+State 40
+
+    8 declaracao: tipo lista SEMI • linha
+
+    IDENTIFIER  shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    IF          shift, and go to state 4
+    WHILE       shift, and go to state 5
+    PRINT       shift, and go to state 6
+    READ        shift, and go to state 7
+
+    $default  reduce using rule 7 (linha)
+
+    linha           go to state 73
+    declaracao      go to state 10
+    condicao        go to state 11
+    laco            go to state 12
+    entradaOuSaida  go to state 13
+    lista           go to state 14
+    tipo            go to state 15
+    variavel        go to state 16
+
+
+State 41
+
+   62 valor: FALSE •
+
+    $default  reduce using rule 62 (valor)
+
+
+State 42
+
+   61 valor: TRUE •
+
+    $default  reduce using rule 61 (valor)
+
+
+State 43
+
+   49 expr: expr • PLUS t
+   50     | expr • MINUS t
+   60 valor: expr •
+
+    PLUS   shift, and go to state 53
+    MINUS  shift, and go to state 54
+
+    $default  reduce using rule 60 (valor)
+
+
+State 44
+
+   37 atribuir: EQUALS valor •
+
+    $default  reduce using rule 37 (atribuir)
+
+
+State 45
+
+   25 listaLinha: error • variavel atribuir listaLinha
+
+    IDENTIFIER  shift, and go to state 1
+
+    variavel  go to state 74
+
+
+State 46
+
+   24 listaLinha: COMMA • variavel atribuir listaLinha
+
+    IDENTIFIER  shift, and go to state 1
+
+    variavel  go to state 75
+
+
+State 47
+
+   23 lista: variavel atribuir listaLinha •
+
+    $default  reduce using rule 23 (lista)
+
+
+State 48
+
+   56 f: MINUS NUMBER •
+
+    $default  reduce using rule 56 (f)
+
+
+State 49
+
+   57 f: MINUS IDENTIFIER •
+
+    $default  reduce using rule 57 (f)
+
+
+State 50
+
+   49 expr: expr • PLUS t
+   50     | expr • MINUS t
+   55 f: OP expr • CP
+
+    PLUS   shift, and go to state 53
+    MINUS  shift, and go to state 54
+    CP     shift, and go to state 76
+
+
+State 51
+
+   10 condicao: IF OP verificacao error • restoDaCondicao linha
+
+    OC  shift, and go to state 77
+
+    restoDaCondicao  go to state 78
+
+
+State 52
+
+    9 condicao: IF OP verificacao CP • restoDaCondicao linha
+
+    OC  shift, and go to state 77
+
+    restoDaCondicao  go to state 79
+
+
+State 53
+
+   49 expr: expr PLUS • t
+
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    MINUS       shift, and go to state 28
+    OP          shift, and go to state 29
+
+    t  go to state 80
+    f  go to state 33
+
+
+State 54
+
+   50 expr: expr MINUS • t
+
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    MINUS       shift, and go to state 28
+    OP          shift, and go to state 29
+
+    t  go to state 81
+    f  go to state 33
+
+
+State 55
+
+   40 verificacao: expr LT • expr opLogico
+
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    MINUS       shift, and go to state 28
+    OP          shift, and go to state 29
+
+    expr  go to state 82
+    t     go to state 32
+    f     go to state 33
+
+
+State 56
+
+   41 verificacao: expr MT • expr opLogico
+
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    MINUS       shift, and go to state 28
+    OP          shift, and go to state 29
+
+    expr  go to state 83
+    t     go to state 32
+    f     go to state 33
+
+
+State 57
+
+   43 verificacao: expr LE • expr opLogico
+
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    MINUS       shift, and go to state 28
+    OP          shift, and go to state 29
+
+    expr  go to state 84
+    t     go to state 32
+    f     go to state 33
+
+
+State 58
+
+   42 verificacao: expr ME • expr opLogico
+
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    MINUS       shift, and go to state 28
+    OP          shift, and go to state 29
+
+    expr  go to state 85
+    t     go to state 32
+    f     go to state 33
+
+
+State 59
+
+   39 verificacao: expr ET • expr opLogico
+
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    MINUS       shift, and go to state 28
+    OP          shift, and go to state 29
+
+    expr  go to state 86
+    t     go to state 32
+    f     go to state 33
+
+
+State 60
+
+   44 verificacao: expr DT • expr opLogico
+
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    MINUS       shift, and go to state 28
+    OP          shift, and go to state 29
+
+    expr  go to state 87
+    t     go to state 32
+    f     go to state 33
+
+
+State 61
+
+   52 t: t TIMES • f
+
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    MINUS       shift, and go to state 28
+    OP          shift, and go to state 29
+
+    f  go to state 88
+
+
+State 62
+
+   53 t: t DIVIDE • f
+
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    MINUS       shift, and go to state 28
+    OP          shift, and go to state 29
+
+    f  go to state 89
+
+
+State 63
+
+   12 laco: WHILE OP verificacao error • restoDoLaco linha
+
+    OC  shift, and go to state 90
+
+    restoDoLaco  go to state 91
+
+
+State 64
+
+   11 laco: WHILE OP verificacao CP • restoDoLaco linha
+
+    OC  shift, and go to state 90
+
+    restoDoLaco  go to state 92
+
+
+State 65
+
+   13 entradaOuSaida: PRINT OP listaPrint CP • SEMI linha
+   14               | PRINT OP listaPrint CP • error linha
+
+    error  shift, and go to state 93
+    SEMI   shift, and go to state 94
+
+
+State 66
+
+   29 listaPrintLinha: error • expr listaPrintLinha
+
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    MINUS       shift, and go to state 28
+    OP          shift, and go to state 29
+
+    expr  go to state 95
+    t     go to state 32
+    f     go to state 33
+
+
+State 67
+
+   28 listaPrintLinha: COMMA • expr listaPrintLinha
+
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    MINUS       shift, and go to state 28
+    OP          shift, and go to state 29
+
+    expr  go to state 96
+    t     go to state 32
+    f     go to state 33
+
+
+State 68
+
+   27 listaPrint: expr listaPrintLinha •
+
+    $default  reduce using rule 27 (listaPrint)
+
+
+State 69
+
+   33 listaReadLinha: error • IDENTIFIER listaReadLinha
+
+    IDENTIFIER  shift, and go to state 97
+
+
+State 70
+
+   32 listaReadLinha: COMMA • IDENTIFIER listaReadLinha
+
+    IDENTIFIER  shift, and go to state 98
+
+
+State 71
+
+   31 listaRead: IDENTIFIER listaReadLinha •
+
+    $default  reduce using rule 31 (listaRead)
+
+
+State 72
+
+   15 entradaOuSaida: READ OP listaRead CP • SEMI linha
+   16               | READ OP listaRead CP • error linha
+
+    error  shift, and go to state 99
+    SEMI   shift, and go to state 100
+
+
+State 73
+
+    8 declaracao: tipo lista SEMI linha •
+
+    $default  reduce using rule 8 (declaracao)
+
+
+State 74
+
+   25 listaLinha: error variavel • atribuir listaLinha
+
+    EQUALS  shift, and go to state 24
+
+    $default  reduce using rule 38 (atribuir)
+
+    atribuir  go to state 101
+
+
+State 75
+
+   24 listaLinha: COMMA variavel • atribuir listaLinha
+
+    EQUALS  shift, and go to state 24
+
+    $default  reduce using rule 38 (atribuir)
+
+    atribuir  go to state 102
+
+
+State 76
+
+   55 f: OP expr CP •
+
+    $default  reduce using rule 55 (f)
+
+
+State 77
+
+   17 restoDaCondicao: OC • linha CC possivelElse
+   18                | OC • linha error possivelElse
+
+    IDENTIFIER  shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    IF          shift, and go to state 4
+    WHILE       shift, and go to state 5
+    PRINT       shift, and go to state 6
+    READ        shift, and go to state 7
+
+    $default  reduce using rule 7 (linha)
+
+    linha           go to state 103
+    declaracao      go to state 10
+    condicao        go to state 11
+    laco            go to state 12
+    entradaOuSaida  go to state 13
+    lista           go to state 14
+    tipo            go to state 15
+    variavel        go to state 16
+
+
+State 78
+
+   10 condicao: IF OP verificacao error restoDaCondicao • linha
+
+    IDENTIFIER  shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    IF          shift, and go to state 4
+    WHILE       shift, and go to state 5
+    PRINT       shift, and go to state 6
+    READ        shift, and go to state 7
+
+    $default  reduce using rule 7 (linha)
+
+    linha           go to state 104
+    declaracao      go to state 10
+    condicao        go to state 11
+    laco            go to state 12
+    entradaOuSaida  go to state 13
+    lista           go to state 14
+    tipo            go to state 15
+    variavel        go to state 16
+
+
+State 79
+
+    9 condicao: IF OP verificacao CP restoDaCondicao • linha
+
+    IDENTIFIER  shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    IF          shift, and go to state 4
+    WHILE       shift, and go to state 5
+    PRINT       shift, and go to state 6
+    READ        shift, and go to state 7
+
+    $default  reduce using rule 7 (linha)
+
+    linha           go to state 105
+    declaracao      go to state 10
+    condicao        go to state 11
+    laco            go to state 12
+    entradaOuSaida  go to state 13
+    lista           go to state 14
+    tipo            go to state 15
+    variavel        go to state 16
+
+
+State 80
+
+   49 expr: expr PLUS t •
+   52 t: t • TIMES f
+   53  | t • DIVIDE f
+
+    TIMES   shift, and go to state 61
+    DIVIDE  shift, and go to state 62
+
+    $default  reduce using rule 49 (expr)
+
+
+State 81
+
+   50 expr: expr MINUS t •
+   52 t: t • TIMES f
+   53  | t • DIVIDE f
+
+    TIMES   shift, and go to state 61
+    DIVIDE  shift, and go to state 62
+
+    $default  reduce using rule 50 (expr)
+
+
+State 82
+
+   40 verificacao: expr LT expr • opLogico
+   49 expr: expr • PLUS t
+   50     | expr • MINUS t
+
+    PLUS   shift, and go to state 53
+    MINUS  shift, and go to state 54
+    AND    shift, and go to state 106
+    OR     shift, and go to state 107
+    NOT    shift, and go to state 108
+
+    $default  reduce using rule 48 (opLogico)
+
+    opLogico  go to state 109
+
+
+State 83
+
+   41 verificacao: expr MT expr • opLogico
+   49 expr: expr • PLUS t
+   50     | expr • MINUS t
+
+    PLUS   shift, and go to state 53
+    MINUS  shift, and go to state 54
+    AND    shift, and go to state 106
+    OR     shift, and go to state 107
+    NOT    shift, and go to state 108
+
+    $default  reduce using rule 48 (opLogico)
+
+    opLogico  go to state 110
+
+
+State 84
+
+   43 verificacao: expr LE expr • opLogico
+   49 expr: expr • PLUS t
+   50     | expr • MINUS t
+
+    PLUS   shift, and go to state 53
+    MINUS  shift, and go to state 54
+    AND    shift, and go to state 106
+    OR     shift, and go to state 107
+    NOT    shift, and go to state 108
+
+    $default  reduce using rule 48 (opLogico)
+
+    opLogico  go to state 111
+
+
+State 85
+
+   42 verificacao: expr ME expr • opLogico
+   49 expr: expr • PLUS t
+   50     | expr • MINUS t
+
+    PLUS   shift, and go to state 53
+    MINUS  shift, and go to state 54
+    AND    shift, and go to state 106
+    OR     shift, and go to state 107
+    NOT    shift, and go to state 108
+
+    $default  reduce using rule 48 (opLogico)
+
+    opLogico  go to state 112
+
+
+State 86
+
+   39 verificacao: expr ET expr • opLogico
+   49 expr: expr • PLUS t
+   50     | expr • MINUS t
+
+    PLUS   shift, and go to state 53
+    MINUS  shift, and go to state 54
+    AND    shift, and go to state 106
+    OR     shift, and go to state 107
+    NOT    shift, and go to state 108
+
+    $default  reduce using rule 48 (opLogico)
+
+    opLogico  go to state 113
+
+
+State 87
+
+   44 verificacao: expr DT expr • opLogico
+   49 expr: expr • PLUS t
+   50     | expr • MINUS t
+
+    PLUS   shift, and go to state 53
+    MINUS  shift, and go to state 54
+    AND    shift, and go to state 106
+    OR     shift, and go to state 107
+    NOT    shift, and go to state 108
+
+    $default  reduce using rule 48 (opLogico)
+
+    opLogico  go to state 114
+
+
+State 88
+
+   52 t: t TIMES f •
+
+    $default  reduce using rule 52 (t)
+
+
+State 89
+
+   53 t: t DIVIDE f •
+
+    $default  reduce using rule 53 (t)
+
+
+State 90
+
+   21 restoDoLaco: OC • linha CC
+   22            | OC • linha error
+
+    IDENTIFIER  shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    IF          shift, and go to state 4
+    WHILE       shift, and go to state 5
+    PRINT       shift, and go to state 6
+    READ        shift, and go to state 7
+
+    $default  reduce using rule 7 (linha)
+
+    linha           go to state 115
+    declaracao      go to state 10
+    condicao        go to state 11
+    laco            go to state 12
+    entradaOuSaida  go to state 13
+    lista           go to state 14
+    tipo            go to state 15
+    variavel        go to state 16
+
+
+State 91
+
+   12 laco: WHILE OP verificacao error restoDoLaco • linha
+
+    IDENTIFIER  shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    IF          shift, and go to state 4
+    WHILE       shift, and go to state 5
+    PRINT       shift, and go to state 6
+    READ        shift, and go to state 7
+
+    $default  reduce using rule 7 (linha)
+
+    linha           go to state 116
+    declaracao      go to state 10
+    condicao        go to state 11
+    laco            go to state 12
+    entradaOuSaida  go to state 13
+    lista           go to state 14
+    tipo            go to state 15
+    variavel        go to state 16
+
+
+State 92
+
+   11 laco: WHILE OP verificacao CP restoDoLaco • linha
+
+    IDENTIFIER  shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    IF          shift, and go to state 4
+    WHILE       shift, and go to state 5
+    PRINT       shift, and go to state 6
+    READ        shift, and go to state 7
+
+    $default  reduce using rule 7 (linha)
+
+    linha           go to state 117
+    declaracao      go to state 10
+    condicao        go to state 11
+    laco            go to state 12
+    entradaOuSaida  go to state 13
+    lista           go to state 14
+    tipo            go to state 15
+    variavel        go to state 16
+
+
+State 93
+
+   14 entradaOuSaida: PRINT OP listaPrint CP error • linha
+
+    IDENTIFIER  shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    IF          shift, and go to state 4
+    WHILE       shift, and go to state 5
+    PRINT       shift, and go to state 6
+    READ        shift, and go to state 7
+
+    $default  reduce using rule 7 (linha)
+
+    linha           go to state 118
+    declaracao      go to state 10
+    condicao        go to state 11
+    laco            go to state 12
+    entradaOuSaida  go to state 13
+    lista           go to state 14
+    tipo            go to state 15
+    variavel        go to state 16
+
+
+State 94
+
+   13 entradaOuSaida: PRINT OP listaPrint CP SEMI • linha
+
+    IDENTIFIER  shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    IF          shift, and go to state 4
+    WHILE       shift, and go to state 5
+    PRINT       shift, and go to state 6
+    READ        shift, and go to state 7
+
+    $default  reduce using rule 7 (linha)
+
+    linha           go to state 119
+    declaracao      go to state 10
+    condicao        go to state 11
+    laco            go to state 12
+    entradaOuSaida  go to state 13
+    lista           go to state 14
+    tipo            go to state 15
+    variavel        go to state 16
+
+
+State 95
+
+   29 listaPrintLinha: error expr • listaPrintLinha
+   49 expr: expr • PLUS t
+   50     | expr • MINUS t
+
+    error  shift, and go to state 66
+    COMMA  shift, and go to state 67
+    PLUS   shift, and go to state 53
+    MINUS  shift, and go to state 54
+
+    CP  reduce using rule 30 (listaPrintLinha)
+
+    listaPrintLinha  go to state 120
+
+
+State 96
+
+   28 listaPrintLinha: COMMA expr • listaPrintLinha
+   49 expr: expr • PLUS t
+   50     | expr • MINUS t
+
+    error  shift, and go to state 66
+    COMMA  shift, and go to state 67
+    PLUS   shift, and go to state 53
+    MINUS  shift, and go to state 54
+
+    CP  reduce using rule 30 (listaPrintLinha)
+
+    listaPrintLinha  go to state 121
+
+
+State 97
+
+   33 listaReadLinha: error IDENTIFIER • listaReadLinha
+
+    error  shift, and go to state 69
+    COMMA  shift, and go to state 70
+
+    CP  reduce using rule 34 (listaReadLinha)
+
+    listaReadLinha  go to state 122
+
+
+State 98
+
+   32 listaReadLinha: COMMA IDENTIFIER • listaReadLinha
+
+    error  shift, and go to state 69
+    COMMA  shift, and go to state 70
+
+    CP  reduce using rule 34 (listaReadLinha)
+
+    listaReadLinha  go to state 123
+
+
+State 99
+
+   16 entradaOuSaida: READ OP listaRead CP error • linha
+
+    IDENTIFIER  shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    IF          shift, and go to state 4
+    WHILE       shift, and go to state 5
+    PRINT       shift, and go to state 6
+    READ        shift, and go to state 7
+
+    $default  reduce using rule 7 (linha)
+
+    linha           go to state 124
+    declaracao      go to state 10
+    condicao        go to state 11
+    laco            go to state 12
+    entradaOuSaida  go to state 13
+    lista           go to state 14
+    tipo            go to state 15
+    variavel        go to state 16
+
+
+State 100
+
+   15 entradaOuSaida: READ OP listaRead CP SEMI • linha
+
+    IDENTIFIER  shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    IF          shift, and go to state 4
+    WHILE       shift, and go to state 5
+    PRINT       shift, and go to state 6
+    READ        shift, and go to state 7
+
+    $default  reduce using rule 7 (linha)
+
+    linha           go to state 125
+    declaracao      go to state 10
+    condicao        go to state 11
+    laco            go to state 12
+    entradaOuSaida  go to state 13
+    lista           go to state 14
+    tipo            go to state 15
+    variavel        go to state 16
+
+
+State 101
+
+   25 listaLinha: error variavel atribuir • listaLinha
+
+    error  shift, and go to state 45
+    COMMA  shift, and go to state 46
+
+    SEMI  reduce using rule 26 (listaLinha)
+
+    listaLinha  go to state 126
+
+
+State 102
+
+   24 listaLinha: COMMA variavel atribuir • listaLinha
+
+    error  shift, and go to state 45
+    COMMA  shift, and go to state 46
+
+    SEMI  reduce using rule 26 (listaLinha)
+
+    listaLinha  go to state 127
+
+
+State 103
+
+   17 restoDaCondicao: OC linha • CC possivelElse
+   18                | OC linha • error possivelElse
+
+    error  shift, and go to state 128
+    CC     shift, and go to state 129
+
+
+State 104
+
+   10 condicao: IF OP verificacao error restoDaCondicao linha •
+
+    $default  reduce using rule 10 (condicao)
+
+
+State 105
+
+    9 condicao: IF OP verificacao CP restoDaCondicao linha •
+
+    $default  reduce using rule 9 (condicao)
+
+
+State 106
+
+   45 opLogico: AND • verificacao
+
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    MINUS       shift, and go to state 28
+    OP          shift, and go to state 29
+
+    verificacao  go to state 130
+    expr         go to state 31
+    t            go to state 32
+    f            go to state 33
+
+
+State 107
+
+   46 opLogico: OR • verificacao
+
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    MINUS       shift, and go to state 28
+    OP          shift, and go to state 29
+
+    verificacao  go to state 131
+    expr         go to state 31
+    t            go to state 32
+    f            go to state 33
+
+
+State 108
+
+   47 opLogico: NOT • verificacao
+
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    MINUS       shift, and go to state 28
+    OP          shift, and go to state 29
+
+    verificacao  go to state 132
+    expr         go to state 31
+    t            go to state 32
+    f            go to state 33
+
+
+State 109
+
+   40 verificacao: expr LT expr opLogico •
+
+    $default  reduce using rule 40 (verificacao)
+
+
+State 110
+
+   41 verificacao: expr MT expr opLogico •
+
+    $default  reduce using rule 41 (verificacao)
+
+
+State 111
+
+   43 verificacao: expr LE expr opLogico •
+
+    $default  reduce using rule 43 (verificacao)
+
+
+State 112
+
+   42 verificacao: expr ME expr opLogico •
+
+    $default  reduce using rule 42 (verificacao)
+
+
+State 113
+
+   39 verificacao: expr ET expr opLogico •
+
+    $default  reduce using rule 39 (verificacao)
+
+
+State 114
+
+   44 verificacao: expr DT expr opLogico •
+
+    $default  reduce using rule 44 (verificacao)
+
+
+State 115
+
+   21 restoDoLaco: OC linha • CC
+   22            | OC linha • error
+
+    error  shift, and go to state 133
+    CC     shift, and go to state 134
+
+
+State 116
+
+   12 laco: WHILE OP verificacao error restoDoLaco linha •
+
+    $default  reduce using rule 12 (laco)
+
+
+State 117
+
+   11 laco: WHILE OP verificacao CP restoDoLaco linha •
+
+    $default  reduce using rule 11 (laco)
+
+
+State 118
+
+   14 entradaOuSaida: PRINT OP listaPrint CP error linha •
+
+    $default  reduce using rule 14 (entradaOuSaida)
+
+
+State 119
+
+   13 entradaOuSaida: PRINT OP listaPrint CP SEMI linha •
+
+    $default  reduce using rule 13 (entradaOuSaida)
+
+
+State 120
+
+   29 listaPrintLinha: error expr listaPrintLinha •
+
+    $default  reduce using rule 29 (listaPrintLinha)
+
+
+State 121
+
+   28 listaPrintLinha: COMMA expr listaPrintLinha •
+
+    $default  reduce using rule 28 (listaPrintLinha)
+
+
+State 122
+
+   33 listaReadLinha: error IDENTIFIER listaReadLinha •
+
+    $default  reduce using rule 33 (listaReadLinha)
+
+
+State 123
+
+   32 listaReadLinha: COMMA IDENTIFIER listaReadLinha •
+
+    $default  reduce using rule 32 (listaReadLinha)
+
+
+State 124
+
+   16 entradaOuSaida: READ OP listaRead CP error linha •
+
+    $default  reduce using rule 16 (entradaOuSaida)
+
+
+State 125
+
+   15 entradaOuSaida: READ OP listaRead CP SEMI linha •
+
+    $default  reduce using rule 15 (entradaOuSaida)
+
+
+State 126
+
+   25 listaLinha: error variavel atribuir listaLinha •
+
+    $default  reduce using rule 25 (listaLinha)
+
+
+State 127
+
+   24 listaLinha: COMMA variavel atribuir listaLinha •
+
+    $default  reduce using rule 24 (listaLinha)
+
+
+State 128
+
+   18 restoDaCondicao: OC linha error • possivelElse
+
+    ELSE  shift, and go to state 135
+
+    $default  reduce using rule 20 (possivelElse)
+
+    possivelElse  go to state 136
+
+
+State 129
+
+   17 restoDaCondicao: OC linha CC • possivelElse
+
+    ELSE  shift, and go to state 135
+
+    $default  reduce using rule 20 (possivelElse)
+
+    possivelElse  go to state 137
+
+
+State 130
+
+   45 opLogico: AND verificacao •
+
+    $default  reduce using rule 45 (opLogico)
+
+
+State 131
+
+   46 opLogico: OR verificacao •
+
+    $default  reduce using rule 46 (opLogico)
+
+
+State 132
+
+   47 opLogico: NOT verificacao •
+
+    $default  reduce using rule 47 (opLogico)
+
+
+State 133
+
+   22 restoDoLaco: OC linha error •
+
+    $default  reduce using rule 22 (restoDoLaco)
+
+
+State 134
+
+   21 restoDoLaco: OC linha CC •
+
+    $default  reduce using rule 21 (restoDoLaco)
+
+
+State 135
+
+   19 possivelElse: ELSE • OC linha CC
+
+    OC  shift, and go to state 138
+
+
+State 136
+
+   18 restoDaCondicao: OC linha error possivelElse •
+
+    $default  reduce using rule 18 (restoDaCondicao)
+
+
+State 137
+
+   17 restoDaCondicao: OC linha CC possivelElse •
+
+    $default  reduce using rule 17 (restoDaCondicao)
+
+
+State 138
+
+   19 possivelElse: ELSE OC • linha CC
+
+    IDENTIFIER  shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    IF          shift, and go to state 4
+    WHILE       shift, and go to state 5
+    PRINT       shift, and go to state 6
+    READ        shift, and go to state 7
+
+    $default  reduce using rule 7 (linha)
+
+    linha           go to state 139
+    declaracao      go to state 10
+    condicao        go to state 11
+    laco            go to state 12
+    entradaOuSaida  go to state 13
+    lista           go to state 14
+    tipo            go to state 15
+    variavel        go to state 16
+
+
+State 139
+
+   19 possivelElse: ELSE OC linha • CC
+
+    CC  shift, and go to state 140
+
+
+State 140
+
+   19 possivelElse: ELSE OC linha CC •
+
+    $default  reduce using rule 19 (possivelElse)

@@ -16,10 +16,14 @@ typedef struct simbolo {
     char *categoria;
     int linha;
     int coluna;
+    int id; 
     struct simbolo *prox;
 } Simbolo;
 
 Simbolo* tabela_simbolos = NULL;
+int proximo_id_disponivel = 1; 
+
+void imprimir_ordenado(Simbolo* s); // <--- MOVIDO: Protótipo da função
 
 Simbolo* buscar(const char* lexema) {
     for (Simbolo* s = tabela_simbolos; s != NULL; s = s->prox) {
@@ -36,6 +40,12 @@ void inserir(const char* lexema, const char* categoria, int linha, int coluna) {
     novo->categoria = strdup(categoria);
     novo->linha = linha;
     novo->coluna = coluna;
+    novo->id = 0; 
+    
+    if (strcmp(categoria, "IDENTIFIER") == 0) {
+        novo->id = proximo_id_disponivel;
+        proximo_id_disponivel++; 
+    }
     
     novo->prox = tabela_simbolos;
     tabela_simbolos = novo;
@@ -49,114 +59,105 @@ void inserir(const char* lexema, const char* categoria, int linha, int coluna) {
 %token LT MT LE ME ET DT AND OR NOT
 %token OP CP OC CC
 
+%define parse.error verbose
+
 %%
 /* ===================================================================
  * Ponto de Partida (Regra Inicial)
- * ===================================================================
- */
+ * =================================================================== */
 
-/* 'linhaP' é a regra inicial da gramática. */
 linhaP:
-      linha { printf("Aceita"); }
+      linha
     ;
 
 /* ===================================================================
  * Estruturas de Alto Nível (Comandos)
- * ===================================================================
- */
+ * =================================================================== */
 
-/* 'linha' é a regra principal que define um único comando ou linha de código. */
 linha:
       declaracao 
     | condicao
     | laco
     | entradaOuSaida
-    | lista fim          /* Atribuição */
-    |                    /* Linha vazia */
+    | lista SEMI linha  /* Atribuição */
+    |                   /* Linha vazia */
     ;
 
-/* Regra para declaração de variável. */
 declaracao:
-      tipo lista fim
+      tipo lista SEMI linha
     ;
 
-/* Regra para o if. */
 condicao:
       IF OP verificacao CP restoDaCondicao linha
+    | IF OP verificacao error restoDaCondicao linha  /* CORREÇÃO: Trata 'if (expr { ...' */
     ;
 
-/* Regra para while. */
 laco:
       WHILE OP verificacao CP restoDoLaco linha
+    | WHILE OP verificacao error restoDoLaco linha  /* CORREÇÃO: Trata 'while (expr { ...' */
     ;
     
-/* Regra para Entrada (read) e Saída (print). */
 entradaOuSaida:
-      PRINT OP listaPrint CP fim
-    | READ OP listaRead CP fim
+      PRINT OP listaPrint CP SEMI linha
+    | PRINT OP listaPrint CP error linha
+    | READ OP listaRead CP SEMI linha
+    | READ OP listaRead CP error linha
     ;
 
 /* ===================================================================
  * Sub-Regras de Comandos (Blocos, Listas, etc.)
- * ===================================================================
- */
+ * =================================================================== */
 
-/* Define o bloco { ... } para um 'if'. */
 restoDaCondicao:
       OC linha CC possivelElse
+    | OC linha error possivelElse  /* CORREÇÃO: Trata 'if (...) { ... else ...' */
     ; 
     
-/* Define o 'else' opcional. */
 possivelElse:
       ELSE OC linha CC
     | /* Vazio (sem else) */
     ;
 
-/* Define o bloco { ... } para um 'while'. */
 restoDoLaco:
       OC linha CC
+    | OC linha error              /* CORREÇÃO: Trata 'while (...) { ...' */
     ;
     
-/* 'lista' é usada para definir uma ou mais variáveis */
 lista:
       variavel atribuir listaLinha
     ;
 
-/* Regra recursiva para a 'lista' */
 listaLinha:
       COMMA variavel atribuir listaLinha { $$ = $2; }
+    | error variavel atribuir listaLinha
     | /* Fim da lista */
     ;
 
-/* 'listaPrint' é usado para definir que expressões e constantes podem ser impressas */
 listaPrint:
-       expr listaPrintLinha
+        expr listaPrintLinha
     ;
 
-/* Regra recursiva para a 'listaPrint' */
 listaPrintLinha:
-       COMMA expr listaPrintLinha
-    |  /* Fim da lista */
+        COMMA expr listaPrintLinha 
+    |   error expr listaPrintLinha
+    |   /* Fim da lista */
     ;
 
-/* 'listaRead' é usada para definir que apenas identificadores podem receber leituras */
 listaRead:
-       IDENTIFIER listaReadLinha
+        IDENTIFIER listaReadLinha
     ;
 
-/* Regra recursiva para a 'listaRead' */
 listaReadLinha:
       COMMA IDENTIFIER listaReadLinha
+    | error IDENTIFIER listaReadLinha
     | /* Fim da lista */
     ;
 
-/* Define o tipo da variável */
 tipo:
       INT 
     | BOOL 
     ;
 
-/* 'atribuir' define uma atribuição opcional */
 atribuir:
       EQUALS valor
     | /* Sem atribuição */
@@ -164,10 +165,8 @@ atribuir:
 
 /* ===================================================================
  * Gramáticas de Expressão
- * ===================================================================
- */
+ * =================================================================== */
 
-/* 'verificacao' é a gramática de expressão para 'if' e 'while'. */
 verificacao:
       expr ET expr opLogico
     | expr LT expr opLogico
@@ -177,7 +176,6 @@ verificacao:
     | expr DT expr opLogico
     ;
 
-/* 'opLogico' permite encadear múltiplas verificações (ex: ... & a < b | c > d) */
 opLogico:
       AND verificacao
     | OR verificacao
@@ -185,51 +183,55 @@ opLogico:
     | /* Fim da expressão lógica */
     ;
 
-/* 'expr' é a gramática de expressão aritmética (soma/subtração). */
 expr:
       expr PLUS t { $$ = $1 + $3; }
     | expr MINUS t { $$ = $1 - $3; }
     | t
     ;
 
-/* 't' é o "termo" (multiplicação/divisão) */
 t:
       t TIMES f { $$ = $1 * $3; }
     | t DIVIDE f { $$ = $1 / $3; }
     | f
     ;
 
-/* 'f' é o "fator" (átomos da expressão) */
 f:
-      OP expr CP     { $$ = $2; }
-    | MINUS NUMBER   { $$ = -$2; }
+      OP expr CP         { $$ = $2; }
+    | MINUS NUMBER       { $$ = -$2; }
+    | MINUS IDENTIFIER   { $$ = -$2; }
     | NUMBER
     | IDENTIFIER
     ;
 
 /* ===================================================================
  * Regras Atômicas e de Finalização
- * ===================================================================
- */
+ * =================================================================== */
 
-/* 'valor' é o que pode vir depois de um '=' (expressão, true ou false) */
 valor:
       expr 
     | TRUE 
     | FALSE 
     ;
 
-/* Um 'variavel' é um IDENTIFIER */
 variavel:
       IDENTIFIER
     ;
 
-/* 'fim' é a regra que define o fim de um comando. */
-fim:
-      SEMI linha
-    ;
 
 %%
+
+void imprimir_ordenado(Simbolo* s) {
+    if (s == NULL) {
+        return;
+    }
+    imprimir_ordenado(s->prox);
+
+    if (strcmp(s->categoria, "IDENTIFIER") == 0) {
+        /* Ajustei a formatação para bater com seu novo cabeçalho */
+        printf("%-5d %-10s %s\n", s->id, s->lexema, s->categoria);
+    }
+}
+
 
 int main(int argc, char *argv[]){
     if (argc < 2) {
@@ -244,15 +246,12 @@ int main(int argc, char *argv[]){
     yyparse();
 
     /* Imprime a tabela de símbolos no final */
-    printf("\n--- TABELA DE SIMBOLOS (Apenas Identificadores) ---\n"); 
-    printf("\nToken          Lexema\n");
-    printf("----------------------\n");
+    printf("\n--- TABELA DE SIMBOLOS ---\n"); 
+    /* Ajustei o cabeçalho para bater com a impressão */
+    printf("\nID    Lexema      Token\n");
+    printf("--------------------------\n");
 
-    for (Simbolo* s = tabela_simbolos; s != NULL; s = s->prox) {
-        if (strcmp(s->categoria, "IDENTIFIER") == 0) {
-            printf("%-13s %s\n", s->categoria, s->lexema);
-        }
-    }
+    imprimir_ordenado(tabela_simbolos);
 
     fclose(yyin);
     return 0;
@@ -260,5 +259,9 @@ int main(int argc, char *argv[]){
 
 /* DEFINIÇÃO DA FUNÇÃO DE ERRO */
 void yyerror(const char *s) {
-    fprintf(stderr, "Erro Sintatico na linha %d, coluna %d: %s\n", yylineno, column_number, s);
+    fprintf(stderr, "==============================\n");
+    fprintf(stderr, "Analise Sintatica Falhou\n");
+    fprintf(stderr, "  > Local: Linha %d, Coluna %d\n", yylineno, column_number);
+    fprintf(stderr, "  > Motivo: %s\n", s);
+    fprintf(stderr, "==============================\n");
 }
